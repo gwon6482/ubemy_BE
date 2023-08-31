@@ -1,0 +1,71 @@
+오류의 종류
+
+- 문법 오류 (Syntax Errors)
+    : 사용자의 문법 실수로 발생
+
+- 런타임 에러 (Runtime Error)
+    : 코드를 실행하려고 할때, 멈춰버리는 현상,
+    문법의 오류는 없으나 코드의 구조상의 문제로 인해 발생하는 오류
+    ex) 함수의 return 문 이후에 작동해야 하는 코드를 작성
+
+- 논리 에러 (Logic Error)
+    : 알고리즘의 오류로 프로그램이 원하는데로 작동하지 않는 에러
+
+------------------------
+
+
+const app = express() 로 생성된 app은
+res,req 가 있어서 
+app.listen() 은 결국
+
+const app = express();
+const server = http.createServer(app);
+server.listen();
+과 같음
+
+express의 핵심 구조는 '미들웨어'임
+
+클라이언트에서 온 요청은 우리가 코드상에 정의해둔 순서대로
+여러 미들웨어를 거져서 응답으로 나가게됨
+
+따라서 app.use 의 순서는 유의미함
+
+app.use는 오버라이딩 함수로써, 5가지 형태가 있음
+app.use는 세 가지 인자를 받는데
+    requset 객체,
+    response 객체,
+    next 함수
+임
+
+app.use()는 express의 미들웨어의 가장 기본적인 형태이며
+한 미들웨어는 요청을 받고 끝낼수도, next()함수를 통해
+다른 미들웨어로 이어갈 수도 있음
+
+------------------------
+
+res.redirect('/') 를 통해 사용자를 다른 url로 
+리다이렉트 시킬 수 있음
+
+------------------------
+
+res.send() 는 어떤 자료형도 전송할 수 있어서
+express에서는 그에 맞춰서 res의 header의
+Content-type을 알아서 조정함
+
+------------------------
+
+라우터 파일의 기본 형식
+
+const express = require('express');
+
+const router = express.Router();
+
+"""
+router.xxx((req,res,next)=>{
+
+})
+"""
+
+module.exports = router;
+
+------------------------
