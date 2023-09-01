@@ -5,6 +5,8 @@
 // 매개변수인 password가 일치할 경우 resolve함수 아닌경우 reject함수를 실행
 // resolve함수는 then()의 콜백함수에 data 전달
 // reject함수는 catch()의 콜백함수에 에러 원인 전달
+
+
 const Auth = (password) => {
     const data = 'ASD123!@#'
     const promise = new Promise((resolve,reject)=>{
