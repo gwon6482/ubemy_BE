@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path')
 
 const app = express();
 
@@ -7,9 +8,10 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({extended :false}));
+app.use(express.static(path.join(__dirname,'public')));
 
 // admin Routes
-app.use(adminRoutes);
+app.use('/admin',adminRoutes);
 
 // shop Roues
 app.use(shopRoutes);
@@ -20,5 +22,9 @@ app.use(shopRoutes);
  * const server = http.createServer(app)
  * server.listen(3000)
  */
+
+app.use((req,res,next)=>{
+    res.status(404).sendFile(path.join(__dirname,'views','404not-found.html'))
+})
 
 app.listen(3000);

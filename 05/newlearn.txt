@@ -69,3 +69,35 @@ router.xxx((req,res,next)=>{
 module.exports = router;
 
 ------------------------
+
+66
+- app.use과 app.get의 차이
+    - use는 해당 url이 포함된 모든 요청의 미들웨어임
+    - get는 해당 url과 정확히 일치하는 요청만 처리함
+
+- 404 not found 
+    - 일반적으로 404페이지는 가장 아래쪽에 위치 시켜 어떤 라우터에도 해당되지 않을 경우 라우팅 되도록함
+    - 404는 app.use를 사용하여 get메소드 만이 아닌, 응답할 수 없는 모든 요청에 대해 404로 응답
+
+- res.status(xxx).send()
+    - res.send 가운데에 status 구문을 사용하여 header의 statuscode를 설정할 수 있음
+    - 404에서는 res.status(404).send( 404에러 페이지 전송) 과 같이 사용가능
+
+- express의 Router에는 공통된 url를 지정할 수 있음
+    - app.use('/admin',adminRoutes); 와 같이 사용하여 url이 /admin/xxx 와 같은 모든 url이 라우팅 되도록 할 수 있음
+    - 따라서 admin.js의 router.get('/add-product, () => {}) 는 사실
+        xxx/admin/add-product 의 요청을 처리함
+
+
+------------------------
+
+- sendFile
+    - 서버가 응답으로 정적파일을 전송할때 사용
+    - express앱의 res.sendFile()로 사용
+- path
+    - sendFile을 사용할 때는 반드시 path.join을 사용하여 절대경로로 적어주어야 함
+    - 안그럼 에러남 내가 해봄
+- require.main
+    - 현재 실행되는 모듈의 정보가 있는 전역 변수
+- require.main.file
+    - npm start를 통해 실행되는 메인 파일의 경로
